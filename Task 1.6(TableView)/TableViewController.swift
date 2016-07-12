@@ -12,17 +12,27 @@ class TableViewController: UITableViewController {
     
     var books = bookArray
     
-
+    @IBAction func addRow(sender: AnyObject) {
+        
+        let newRow = "New Row"
+        
+        books.append(newRow)
+        
+        tableView.reloadData()
+    }
+   
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.allowsSelectionDuringEditing = true
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+       
+       //Edit button
          self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -31,37 +41,33 @@ class TableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
+ 
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         
-    
+       
         return books.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-
         
         cell.textLabel?.text = books[indexPath.item]
-    
 
         return cell
+
+    }
+    //Used to title each section
+    override func tableView(tableView:UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        return "Book Titles"
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        
+            return .Delete
     }
-    */
 
     
     // Override to support editing the table view.
@@ -72,36 +78,31 @@ class TableViewController: UITableViewController {
        
             // Delete the row from the data source
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
             
-           tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        }    
+        }
     }
     
 
     
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
+      override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        if editing {
+            tableView.setEditing(true, animated: true)
+        } else {
+            tableView.setEditing(false, animated: true)
+        
+        }
+        
     }
     
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    // Funtion to move rows in table
+    override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        
+        let itemToMove = books[sourceIndexPath.row]
+        books.removeAtIndex(sourceIndexPath.row)
+        books.insert(itemToMove, atIndex: destinationIndexPath.row)
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+   
 }

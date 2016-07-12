@@ -18,11 +18,11 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bqz-JQ-pmg" id="wGG-tm-YIb">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DnV-9F-skA">
-                                            <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -37,7 +37,13 @@
                             <outlet property="delegate" destination="WDU-BH-OvD" id="VdL-po-ljg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Book Titles" id="mB9-Ly-MHU"/>
+                    <navigationItem key="navigationItem" title="Book Titles" id="mB9-Ly-MHU">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="Ps7-sf-bfp">
+                            <connections>
+                                <action selector="addRow:" destination="WDU-BH-OvD" id="9P4-4u-J5R"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6jj-WX-1Pm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
